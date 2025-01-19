@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import TicTacToe from "./components/TicTacToe";
+import "./index.css";
 
 function App() {
+  const [count, setCount] = useState(3); // Default to 3x3 grid
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    if (value >= 3) {
+      setCount(Number(value));
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col items-center h-screen bg-slate-500">
+      <h1 className="text-center mt-6 text-[24px] font-bold">Tic Tac Toe</h1>
+      <input
+        className="mt-4 p-2 border border-black rounded-xl"
+        type="number"
+        value={count}
+        onChange={handleInputChange}
+      />
+      <div className="flex justify-center w-full">
+        <TicTacToe count={count} />
+      </div>
     </div>
   );
 }
